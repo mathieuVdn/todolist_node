@@ -2,8 +2,7 @@ const {DataTypes, Sequelize} = require('sequelize');
 const db = require('./../db/db');
 const Tasks = require('./TasksModel');
 
-
-const TaskLists = db.define('TaskList', {
+const TaskLists = db.define('taskLists', {
     id : {
         type : DataTypes.INTEGER,
         primaryKey : true,
@@ -16,22 +15,19 @@ const TaskLists = db.define('TaskList', {
     description : {
         type : DataTypes.STRING,
         allowNull : false
-    },
+    }
+}, {
+    timestamps: true,
+    createdAt: true,
+    updatedAt: true
+});
+TaskLists.hasMany(Tasks, {
 
-},
-    {
-        timestamps: true,
-        createdAt: true,
-        updatedAt: true
-    });
-
-TaskLists.hasMany(Tasks,{
     foreignKey : {
-        allowNull: false,
-        name: 'task_lists_id'
+        allowNull : false,
+        name: 'taskList_id'
     },
-    sourceKey: 'id'
-})
-TaskLists.hasMany()
+    sourceKey :'id'
+});
 
 module.exports = TaskLists

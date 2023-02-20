@@ -1,33 +1,15 @@
 const {Sequelize, DataTypes} = require('sequelize')
 const Users = require('./UserModel')
 const TasksLists = require('./TaskListsModel')
+const db = require('./../db/db')
 
-const UserTasksLists = sequelize.define('userTasksLists', {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-    },
-    users_id: {
+const UserTasksLists = db.define('UserTasksLists', {
+    id: {
         type: DataTypes.INTEGER,
-        references: {
-            model: Movie, // 'Movies' would also work
-            key: 'id'
-        }
-    },
-    ActorId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: Actor, // 'Actors' would also work
-            key: 'id'
-        }}},
-
-    {
-        timestamps: true,
-        createdAt: 'created',
-    updatedAt: false
-
-})
+        primaryKey: true,
+        autoIncrement: true
+    }
+}, { timestamps: false });
 Users.belongsToMany(TasksLists, { through: 'UserTasksLists' })
 TasksLists.belongsToMany(Users, { through: 'UserTasksLists' });
 

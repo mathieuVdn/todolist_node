@@ -2,7 +2,7 @@ const {DataTypes, Sequelize} = require('sequelize');
 const db = require('./../db/db')
 const TaskLists = require('./TaskListsModel')
 
-const Users = db.define('users', {
+const Users = db.define('user', {
     id : {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -14,9 +14,7 @@ const Users = db.define('users', {
     },
     mail : {
         type: DataTypes.STRING,
-        validate : {
-            isEmail: true
-        }
+          allowNull: false
     },
     age :{
         type : DataTypes.INTEGER
@@ -32,7 +30,7 @@ const Users = db.define('users', {
 Users.hasMany(TaskLists, {
     foreignKey : {
         allowNull : false,
-        name: 'creator_id'
+        name: 'userId'
     },
     sourceKey :'id'
 })

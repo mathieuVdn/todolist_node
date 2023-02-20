@@ -1,5 +1,6 @@
 const {Sequelize, DataTypes} = require('sequelize');
 const db = require('./../db/db');
+const TaskLists = require('./TaskListsModel');
 
 const Tasks = db.define('tasks', {
     id : {
@@ -21,14 +22,14 @@ const Tasks = db.define('tasks', {
     },
     amount: {
         type: DataTypes.INTEGER,
-        allowNull: false
-    }
-},
-    {
-        timestamps : true,
-        createdAt : true,
-        updatedAt: false
-    })
+        allowNull: true
+    },
+
+}, {
+    timestamps : true,
+    createdAt : true,
+    updatedAt: false
+});
 
 
 module.exports = Tasks
